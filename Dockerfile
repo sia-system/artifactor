@@ -1,6 +1,6 @@
 FROM debian:buster-slim
 WORKDIR /
-ADD package/artifactor /
+ADD ./artifactor /
 
 RUN adduser -u 1000 --disabled-password --no-create-home --gecos "" app_user
 RUN chmod +x ./artifactor
