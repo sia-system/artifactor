@@ -1,0 +1,15 @@
+certs:
+    key-file: /certs/internal.key
+    cert-file: /certs/internal.crt
+server-port: 9999
+
+providers:
+    git.acc.md:
+        url: git.acc.md
+        api-type: gitlab
+        secret-token: gdfgdgsdgsdgsd45435
+    github.com:
+        url: github.com
+        api-type: github
+        secret-token: gdsf34t3425trwegewr34653
+    
