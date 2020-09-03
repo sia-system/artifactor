@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-go@v2
         with:
             go-version: 1.14.x
-      - name: Cache Gradle packages
+      - name: Cache Golang packages
         uses: actions/cache@v2
         with:
             path: ~/go/pkg/mod
