@@ -102,6 +102,8 @@ func unzipAssets(destination string, body []byte) error {
 		}
 		fpath := filepath.Join(destination, filename)
 
+		fmt.Println("        uzip entry: " + fpath)
+
 		// Check for ZipSlip. More Info: http://bit.ly/2MsjAWE
 		if !strings.HasPrefix(fpath, filepath.Clean(destination)+string(os.PathSeparator)) {
 			return fmt.Errorf("%s: illegal file path", fpath)
