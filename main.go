@@ -68,9 +68,11 @@ func main() {
 			if err := unzipAssets(projectConf.MountVolume, assets); err != nil {
 				color.FgRed.Printf("%v\n", err)
 			}
-			if err := copyAssets(projectConf.AssetsSource, projectConf.AssetsDestination, projectConf.MountVolume); err != nil {
-				color.FgRed.Printf("%v\n", err)
-			}
+			/*
+				if err := copyAssets(projectConf.AssetsSource, projectConf.AssetsDestination, projectConf.MountVolume); err != nil {
+					color.FgRed.Printf("%v\n", err)
+				}
+			*/
 		} else {
 			color.FgGray.Println("     not found assets")
 		}
@@ -145,9 +147,9 @@ func unzipAssets(destination string, body []byte) error {
 // Separator is file separator for current OS
 const Separator = string(filepath.Separator)
 
-
 // copy additional assets from mounted source dir to destination folder
 // currently supports only flat directories
+/*
 func copyAssets(assetsSource, assetsDestination, copyLocation string) error {
 	if assetsSource == "" {
 		return nil
@@ -179,7 +181,7 @@ func copyAssets(assetsSource, assetsDestination, copyLocation string) error {
         }
 		defer source.Close()
 		// println("source file successfully opened")
-		
+
 		outFile, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, f.Mode())
 		if err != nil {
 			return err
@@ -192,3 +194,4 @@ func copyAssets(assetsSource, assetsDestination, copyLocation string) error {
 		return err
 	})
 }
+*/

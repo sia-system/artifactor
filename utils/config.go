@@ -30,13 +30,13 @@ type ProviderConfig struct {
 
 // ProjectConfig contains info about git provider
 type ProjectConfig struct {
-	Provider          string `yaml:"provider"`       // provider of git
-	Group             string `yaml:"group"`          // group or oraganization
-	Project           string `yaml:"project"`        // project or repo
-	MountVolume       string `yaml:"mount-volume"`   // volume where copy release artifacts
-	AppServerMode     string `yaml:"app-serve-mode"` // `master` (prod) or `devel` mode
-	AssetsSource      string `yaml:"assets-src"`     // source of additional assets
-	AssetsDestination string `yaml:"assets-dst"`     // name of folder in mount volume for copy assets
+	Provider      string `yaml:"provider"`       // provider of git
+	Group         string `yaml:"group"`          // group or oraganization
+	Project       string `yaml:"project"`        // project or repo
+	MountVolume   string `yaml:"mount-volume"`   // volume where copy release artifacts
+	AppServerMode string `yaml:"app-serve-mode"` // `master` (prod) or `devel` mode
+	// AssetsSource      string `yaml:"assets-src"`     // source of additional assets
+	// AssetsDestination string `yaml:"assets-dst"`     // name of folder in mount volume for copy assets
 }
 
 // LoadDeployConfig load config of deployment
@@ -61,7 +61,8 @@ func LoadProjectConfig() *ProjectConfig {
 	project := os.Getenv("PROJECT")
 	volume := os.Getenv("VOLUME")
 	mode := os.Getenv("APP_SERVER_MODE")
-	assetsSource := os.Getenv("ASSETS_SRC")
-	assetsDestination := os.Getenv("ASSETS_DST")
-	return &ProjectConfig{provider, group, project, volume, mode, assetsSource, assetsDestination}
+	// assetsSource := os.Getenv("ASSETS_SRC")
+	// assetsDestination := os.Getenv("ASSETS_DST")
+	// return &ProjectConfig{provider, group, project, volume, mode, assetsSource, assetsDestination}
+	return &ProjectConfig{provider, group, project, volume, mode}
 }
