@@ -164,15 +164,17 @@ func copyAssets(assetsSource, assetsDestination, copyLocation string) error {
 		if err != nil {
 			return fmt.Errorf("error walk dir%s: %v", path, err)
 		}
-		if f.IsDir() {
-			// not support local folders
-			return nil
-		}
-
 		var strippedFilename = path[sourcePrefixLen:]
 		println("src path: " + path + "; stripped: " + strippedFilename)
 		var filename = filepath.Join(destinationDir, strippedFilename)
 		println("destination: " + filename)
+
+		if f.IsDir() {
+			if err = createDir(filename); err != nil {
+				return err
+			}
+			return nil
+		}
 
 		source, err := os.Open(path)
 		if err != nil {
@@ -192,4 +194,19 @@ func copyAssets(assetsSource, assetsDestination, copyLocation string) error {
 
 		return err
 	})
+}
+
+func createDir(destination string) error {
+	if len(destination) > 0 && destination != "./" {
+		_, err := os.Stat(destination)
+		if err != nil {
+			if os.IsNotExist(err) {
+				println("create directory: " + destination)
+				if err = os.MkdirAll(destination, os.ModePerm); err != nil {
+					return fmt.Errorf("error creation dir %s: %v", destination, err)
+				}
+			}
+		}
+	}
+	return nil
 }
