@@ -68,11 +68,9 @@ func main() {
 			if err := unzipAssets(projectConf.MountVolume, assets); err != nil {
 				color.FgRed.Printf("%v\n", err)
 			}
-			/*
-				if err := copyAssets(projectConf.AssetsSource, projectConf.AssetsDestination, projectConf.MountVolume); err != nil {
-					color.FgRed.Printf("%v\n", err)
-				}
-			*/
+			if err := copyAssets(projectConf.AssetsSource, projectConf.AssetsDestination, projectConf.MountVolume); err != nil {
+				color.FgRed.Printf("%v\n", err)
+			}
 		} else {
 			color.FgGray.Println("     not found assets")
 		}
@@ -151,7 +149,6 @@ const Separator = string(filepath.Separator)
 
 // copy additional assets from mounted source dir to destination folder
 // currently supports only flat directories
-/*
 func copyAssets(assetsSource, assetsDestination, copyLocation string) error {
 	if assetsSource == "" {
 		return nil
@@ -173,14 +170,14 @@ func copyAssets(assetsSource, assetsDestination, copyLocation string) error {
 		}
 
 		var strippedFilename = path[sourcePrefixLen:]
-		// println("src path: " + path + "; stripped: " + strippedFilename)
+		println("src path: " + path + "; stripped: " + strippedFilename)
 		var filename = filepath.Join(destinationDir, strippedFilename)
-		// println("destination: " + filename)
+		println("destination: " + filename)
 
 		source, err := os.Open(path)
-        if err != nil {
-            return err
-        }
+		if err != nil {
+			return err
+		}
 		defer source.Close()
 		// println("source file successfully opened")
 
@@ -196,4 +193,3 @@ func copyAssets(assetsSource, assetsDestination, copyLocation string) error {
 		return err
 	})
 }
-*/
