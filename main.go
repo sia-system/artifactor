@@ -65,7 +65,7 @@ func main() {
 		if err != nil {
 			color.FgRed.Printf("%v: \n", err)
 		} else if assets != nil {
-			if err := unzipAssets(projectConf.MountVolume, assets); err != nil {
+			if err := unzipAssets(projectConf.MountVolume, projectConf.Path, assets); err != nil {
 				color.FgRed.Printf("%v\n", err)
 			}
 			if err := copyAssets(projectConf.AssetsSource, projectConf.AssetsDestination, projectConf.MountVolume); err != nil {
@@ -81,7 +81,7 @@ func main() {
 }
 
 // unzip assets from git server to destination folder
-func unzipAssets(destination string, body []byte) error {
+func unzipAssets(destination, subpath string, body []byte) error {
 	buff := bytes.NewBuffer(body)
 	reader := bytes.NewReader(buff.Bytes())
 
@@ -98,6 +98,17 @@ func unzipAssets(destination string, body []byte) error {
 		if filename == "" {
 			continue
 		}
+
+		if len(subpath) > 0 {
+			if !strings.HasPrefix(filename, subpath) {
+				continue
+			}
+			filename = filename[len(subpath)+1:]
+			if filename == "" {
+				continue
+			}
+		}
+
 		fpath := filepath.Join(destination, filename)
 
 		fmt.Println("        uzip entry: " + fpath)

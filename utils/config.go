@@ -33,6 +33,7 @@ type ProjectConfig struct {
 	Provider          string `yaml:"provider"`       // provider of git
 	Group             string `yaml:"group"`          // group or oraganization
 	Project           string `yaml:"project"`        // project or repo
+	Path              string `yaml:"path"`           // path in zip file
 	MountVolume       string `yaml:"mount-volume"`   // volume where copy release artifacts
 	AppServerMode     string `yaml:"app-serve-mode"` // `master` (prod) or `devel` mode
 	AssetsSource      string `yaml:"assets-src"`     // source of additional assets
@@ -59,10 +60,10 @@ func LoadProjectConfig() *ProjectConfig {
 	provider := os.Getenv("PROVIDER")
 	group := os.Getenv("GROUP")
 	project := os.Getenv("PROJECT")
+	path := os.Getenv("PATH")
 	volume := os.Getenv("VOLUME")
 	mode := os.Getenv("APP_SERVER_MODE")
 	assetsSource := os.Getenv("ASSETS_SRC")
 	assetsDestination := os.Getenv("ASSETS_DST")
-	return &ProjectConfig{provider, group, project, volume, mode, assetsSource, assetsDestination}
-	// return &ProjectConfig{provider, group, project, volume, mode}
+	return &ProjectConfig{provider, group, project, path, volume, mode, assetsSource, assetsDestination}
 }
