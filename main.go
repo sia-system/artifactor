@@ -91,6 +91,7 @@ func unzipAssets(destination, subpath string, body []byte) error {
 	if err != nil {
 		return fmt.Errorf("unzip assets error: %v", err)
 	}
+	println()
 
 	cnt := 0
 	for _, f := range zipReader.File {
