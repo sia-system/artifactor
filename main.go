@@ -52,8 +52,9 @@ func main() {
 	}
 
 	{
-		color.FgGray.Println(" project " + projectConf.Project)
-		color.FgGray.Println(" mount-volume " + projectConf.MountVolume)
+		color.FgGray.Println(" project: " + projectConf.Project)
+		color.FgGray.Println(" mount-volume: " + projectConf.MountVolume)
+		color.FgGray.Println(" source-path: " + projectConf.Path)
 
 		gitclient, ok := gitClients[projectConf.Provider]
 		if !ok {
@@ -98,6 +99,8 @@ func unzipAssets(destination, subpath string, body []byte) error {
 		if filename == "" {
 			continue
 		}
+
+		fmt.Println("        found entry: " + filename)
 
 		if len(subpath) > 0 {
 			if !strings.HasPrefix(filename, subpath) {
