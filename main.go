@@ -54,7 +54,7 @@ func main() {
 	{
 		color.FgGray.Println(" project: " + projectConf.Project)
 		color.FgGray.Println(" mount-volume: " + projectConf.MountVolume)
-		color.FgGray.Println(" source-path: " + projectConf.Path)
+		color.FgGray.Println(" source-path: " + projectConf.SourcePath)
 
 		gitclient, ok := gitClients[projectConf.Provider]
 		if !ok {
@@ -66,7 +66,7 @@ func main() {
 		if err != nil {
 			color.FgRed.Printf("%v: \n", err)
 		} else if assets != nil {
-			if err := unzipAssets(projectConf.MountVolume, projectConf.Path, assets); err != nil {
+			if err := unzipAssets(projectConf.MountVolume, projectConf.SourcePath, assets); err != nil {
 				color.FgRed.Printf("%v\n", err)
 			}
 			if err := copyAssets(projectConf.AssetsSource, projectConf.AssetsDestination, projectConf.MountVolume); err != nil {
